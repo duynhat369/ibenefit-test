@@ -26,7 +26,6 @@ const server = (async () => {
             array24ElementsFromData.push(item)
         }
     }
-    // console.log("array24ElementsFromData", array24ElementsFromData)
     // create 18 elements from array 24 elements (unduplicated)
     const array18ElementsFromArray24Elements = []
     for (let i = 0; i < 18; i++) {
@@ -37,42 +36,21 @@ const server = (async () => {
         }
         array18ElementsFromArray24Elements.push(item)
     }
-    // console.log("array18ElementsFromArray24Elements", array18ElementsFromArray24Elements)
     // create a list from array 18 elements (unduplicated)
-    const array6ElementsFromArray8Elements = []
-    for (let i = 0; i < 6; i++) {
-        let list = []
-        
+    const array6ElementsFromArray18Elements = []
 
-     
-        console.log("list", list)
-        for (let j = 0; j < 3; j++) {
-            list.push(array18ElementsFromArray24Elements[i])
-            array18ElementsFromArray24Elements.splice(i,1)
-            let item = {
-                "list": list,
-                // "primary": nameIn,
-            }
-            array6ElementsFromArray8Elements.push(item)
+    for (let i = 0; i < 6; i++) {
+        const newArrayHasName = array18ElementsFromArray24Elements.map((element) => element.name)
+        const newArrayHasIndex = array18ElementsFromArray24Elements.map((element) => element.index)
+        const elementsSlice = newArrayHasName.slice(0, 3)
+        const indexSlice = newArrayHasIndex.slice(0, 3)
+        let item = {
+            "list": elementsSlice,
+            "primary": randomNum(indexSlice)
         }
+        array6ElementsFromArray18Elements.push(item)
+        array18ElementsFromArray24Elements.splice(0, 3)
     }
-    console.log("array6ElementsFromArray8Elements", array6ElementsFromArray8Elements)
-    // ["abc", "hkt", "xyz", "123" ,"dog", "cat"] =>  [
-    //     {
-    //         name: "abc",
-    //         index: 0,
-    //     },
-    //     {
-    //         name: "hkt",
-    //         index: 1,
-    //     },
-    //     {
-    //         name: "xyz",
-    //         index: 2,
-    //     },
-    //     {
-    //         name: "123",
-    //         index: 3,
-    //     },
-    // ]
+    console.log("array6ElementsFromArray18Elements", array6ElementsFromArray18Elements)
+    return array6ElementsFromArray18Elements
 })()
